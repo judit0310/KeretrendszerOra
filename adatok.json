@@ -1,0 +1,38 @@
+[
+  {
+    "nev": "Nagy János",
+    "id": "8dca8f53-c2e7-4dd7-b8fe-ce8964082c8d",
+    "szuletesiDatum": [
+      1990,
+      5,
+      1
+    ],
+    "reszleg": null,
+    "fizetes": 180000.0,
+    "nyelvIsmeret": null
+  },
+  {
+    "nev": "Nagy János",
+    "id": "c1a99ee0-63ca-484f-ae4c-67e50d7ac63f",
+    "szuletesiDatum": [
+      1990,
+      5,
+      1
+    ],
+    "reszleg": null,
+    "fizetes": 180000.0,
+    "nyelvIsmeret": null
+  },
+  {
+    "nev": "Nagy János",
+    "id": "067520a4-5124-4370-8125-5e522dec6c32",
+    "szuletesiDatum": [
+      1990,
+      5,
+      1
+    ],
+    "reszleg": null,
+    "fizetes": 180000.0,
+    "nyelvIsmeret": null
+  }
+]

@@ -1,0 +1,29 @@
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping">
+    <class name="uni.eszterhazy.keretrendszer.model.Dolgozo" table="dolgozo">
+        <id name="id" type="string" column="id"/>
+        <property name="nev" column="nev" type="string"/>
+        <property name="szuletesiDatum" column="szuletesi_datum" type="LocalDate"/>
+        <property name="fizetes" column="fizetes" type="double"/>
+        <property name="reszleg" column="reszleg">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">uni.eszterhazy.keretrendszer.model.Reszleg</param>
+                <param name="useNamed">true</param>
+            </type>
+        </property>
+        <list name="nyelvIsmeret" cascade="all" fetch="join">
+            <key column="dolgozo" not-null="true"/>
+            <list-index column="idx"/>
+            <one-to-many class="uni.eszterhazy.keretrendszer.model.NyelvIsmeret"/>
+        </list>
+
+    </class>
+
+    <class name="uni.eszterhazy.keretrendszer.model.NyelvIsmeret" table="nyelv_ismeret">
+        <id name="id" type="int" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="nyelv" type="string" not-null="true"/>
+        <property name="szint" type="string"/>
+    </class>
+
+</hibernate-mapping>

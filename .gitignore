@@ -1,0 +1,8 @@
+# Project exclude paths
+/console/target/
+/core/target/
+/dao_json/target/
+/dao_mongo/target/
+/dao_relational/target/
+/service/target/
+/util/target/
