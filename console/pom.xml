@@ -25,7 +25,7 @@
     <dependencies>
         <dependency>
             <groupId>uni.eszterhazy.keretrendszer</groupId>
-            <artifactId>service</artifactId>
+            <artifactId>controller</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -42,6 +42,16 @@
             <groupId>uni.eszterhazy.keretrendszer</groupId>
             <artifactId>dao_mongo</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>5.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.1.9.RELEASE</version>
         </dependency>
     </dependencies>
 

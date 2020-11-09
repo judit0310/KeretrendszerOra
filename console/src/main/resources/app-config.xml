@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="mongoDBDAO" class="uni.eszterhazy.keretrendszer.dao.mongo.DolgozoDAOMongo">
+        <constructor-arg index="0" value="mongodb://localhost:27018"/>
+        <constructor-arg index="1" value="dolgozok"/>
+        <constructor-arg index="2" value="dolgozo"/>
+    </bean>
+    <bean id="dolgozoService" class="uni.eszterhazy.keretrendszer.service.impl.DolgozoServiceImpl">
+        <constructor-arg ref="mongoDBDAO"/>
+    </bean>
+
+</beans>
