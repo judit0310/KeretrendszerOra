@@ -1,6 +1,7 @@
 package uni.eszterhazy.keretrendszer.model;
 
 import org.apache.log4j.Logger;
+import org.springframework.format.annotation.DateTimeFormat;
 import uni.eszterhazy.keretrendszer.exceptions.FizetesNegativ;
 import uni.eszterhazy.keretrendszer.exceptions.NevNemLehetUres;
 import uni.eszterhazy.keretrendszer.exceptions.RosszSzuletesiDatum;
@@ -14,6 +15,7 @@ import java.util.UUID;
 public class Dolgozo {
     private String nev;
     private String id;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate szuletesiDatum;
     private Reszleg reszleg;
     private double fizetes;
@@ -49,7 +51,7 @@ public class Dolgozo {
         return szuletesiDatum;
     }
 
-    public void setSzuletesiDatum(LocalDate szuletesiDatum) throws RosszSzuletesiDatum {
+    public void setSzuletesiDatum(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate szuletesiDatum) throws RosszSzuletesiDatum {
         if (szuletesiDatum.isAfter(LocalDate.now().minusYears(16))){
             throw new RosszSzuletesiDatum("16 evnel fiatalabb: "+szuletesiDatum);
         }

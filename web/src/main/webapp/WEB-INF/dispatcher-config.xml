@@ -6,4 +6,21 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <context:component-scan base-package="uni.eszterhazy.keretrendszer.controller"/>
     <mvc:annotation-driven/>
+
+
+
+    <bean id="mongoDBDAO" class="uni.eszterhazy.keretrendszer.dao.mongo.DolgozoDAOMongo">
+        <constructor-arg index="0" value="mongodb://localhost:27018"/>
+        <constructor-arg index="1" value="dolgozok"/>
+        <constructor-arg index="2" value="dolgozo"/>
+    </bean>
+    <bean id="dolgozoService" class="uni.eszterhazy.keretrendszer.service.impl.DolgozoServiceImpl">
+        <constructor-arg ref="mongoDBDAO"/>
+    </bean>
+
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+    </bean>
+
+
 </beans>
