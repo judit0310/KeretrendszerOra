@@ -28,7 +28,13 @@ public class DolgozoDAOMongo implements DolgozoDAO {
     }
 
     public void createDolgozo(Dolgozo dolgozo) throws DolgozoAlreadyAdded {
-        collection.insert(DolgozoAdapter.dolgozoToDBObject(dolgozo));
+        try {
+            readDolgozo(dolgozo.getId());
+        } catch (DolgozoNotFound dolgozoNotFound) {
+            collection.insert(DolgozoAdapter.dolgozoToDBObject(dolgozo));
+            return;
+        }
+       throw new DolgozoAlreadyAdded(dolgozo.getId());
     }
 
     public Collection<Dolgozo> readAllDolgozo() {
@@ -59,4 +65,6 @@ public class DolgozoDAOMongo implements DolgozoDAO {
     public Collection<Dolgozo> readAllDolgozoOfReszleg(Reszleg reszleg) {
         return null;
     }
+
+
 }

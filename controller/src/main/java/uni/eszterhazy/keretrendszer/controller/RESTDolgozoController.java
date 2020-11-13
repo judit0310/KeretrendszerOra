@@ -1,10 +1,16 @@
 package uni.eszterhazy.keretrendszer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import uni.eszterhazy.keretrendszer.exceptions.DolgozoAlreadyAdded;
+import uni.eszterhazy.keretrendszer.exceptions.DolgozoNotFound;
+import uni.eszterhazy.keretrendszer.exceptions.RosszSzuletesiDatum;
 import uni.eszterhazy.keretrendszer.model.Dolgozo;
 import uni.eszterhazy.keretrendszer.model.Reszleg;
 import uni.eszterhazy.keretrendszer.service.DolgozoService;
@@ -25,10 +31,19 @@ public class RESTDolgozoController {
 //        return dolgozoService.getAllDolgozo();
 //    }
 //2561ea85-4e9d-4d33-b56f-8f8053cc0fce
+   /* @GetMapping(value = "dolgozo/{id:[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}}")
+    public Dolgozo getDolgozoById(@PathVariable(name = "id") String id) throws DolgozoNotFound {
+        try{
+            return dolgozoService.getDolgozoById(id);
+        }catch (DolgozoNotFound e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Dolgozo az adott azonositoval nem található: "+e.getMessage(), e);
+        }
+    }*/
     @GetMapping(value = "dolgozo/{id:[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}}")
-    public Dolgozo getDolgozoById(@PathVariable(name = "id") String id) {
-        return dolgozoService.getDolgozoById(id);
+    public Dolgozo getDolgozoById(@PathVariable(name = "id") String id) throws DolgozoNotFound {
+            return dolgozoService.getDolgozoById(id);
     }
+
 
    /* @GetMapping(value = "dolgozok")
     public Collection<Dolgozo> getAllDolgozoOfReszleg(@RequestParam(value = "reszleg", required = false) Reszleg reszleg, @RequestParam(value = "minimumfizetes", required = false) Integer fizetes) {
@@ -65,4 +80,13 @@ public class RESTDolgozoController {
         dolgozoService.addDolgozo(dolgozo);
         return "Új dolgozó került hozzáadásra a következő azonosítóval: "+dolgozo.getId();
     }
+
+    @ExceptionHandler(DolgozoAlreadyAdded.class)
+    @ResponseStatus(HttpStatus.IM_USED)
+    public String usedDolgozoId(DolgozoAlreadyAdded e){
+        return "Dolgozo az adott azonositoval már létezik: "+e.getMessage();
+    }
+
+
+
 }

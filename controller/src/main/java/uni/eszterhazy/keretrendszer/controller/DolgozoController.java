@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import uni.eszterhazy.keretrendszer.exceptions.DolgozoAlreadyAdded;
+import uni.eszterhazy.keretrendszer.exceptions.DolgozoNotFound;
 import uni.eszterhazy.keretrendszer.model.Dolgozo;
 import uni.eszterhazy.keretrendszer.model.Reszleg;
 import uni.eszterhazy.keretrendszer.service.DolgozoService;
@@ -39,7 +40,7 @@ public class DolgozoController {
     }
 
     @GetMapping(value = "/dolgozo/{id}")
-    public String getDolgozoById(@PathVariable String id, Model model){
+    public String getDolgozoById(@PathVariable String id, Model model) throws DolgozoNotFound {
         model.addAttribute("dolgozo", service.getDolgozoById(id));
         return "dolgozodetails.jsp";
     }

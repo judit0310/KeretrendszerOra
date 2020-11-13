@@ -33,13 +33,8 @@ public class DolgozoServiceImpl implements DolgozoService {
     }
 
     @Override
-    public Dolgozo getDolgozoById(String id) {
-        try {
+    public Dolgozo getDolgozoById(String id) throws DolgozoNotFound {
             return dao.readDolgozo(id);
-        } catch (DolgozoNotFound dolgozoNotFound) {
-            dolgozoNotFound.printStackTrace();
-        }
-        return null;
     }
 
     @Override
