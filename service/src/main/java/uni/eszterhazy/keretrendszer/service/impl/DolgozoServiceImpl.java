@@ -10,6 +10,7 @@ import uni.eszterhazy.keretrendszer.exceptions.DolgozoAlreadyAdded;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class DolgozoServiceImpl implements DolgozoService {
     Logger logger = Logger.getLogger(this.getClass());
@@ -53,7 +54,9 @@ public class DolgozoServiceImpl implements DolgozoService {
 
     @Override
     public Collection<Dolgozo> readAllDolgozoOfReszleg(Reszleg reszleg) {
-        return null;
+        Collection<Dolgozo> dolgozok = getAllDolgozo();
+        Collection<Dolgozo> result = dolgozok.stream().filter(d -> d.getReszleg() == reszleg).collect(Collectors.toList());
+        return result;
     }
 
     @Override
@@ -66,6 +69,19 @@ public class DolgozoServiceImpl implements DolgozoService {
         return sum / dolgozok.size();*/
 
         return dolgozok.stream().mapToDouble(d ->d.getFizetes()).average().getAsDouble();
+    }
+
+    @Override
+    public Collection<Dolgozo> getAllDolgozoInWageRange(int minimum, int maximum) {
+        if(maximum <= minimum){
+            throw new IllegalArgumentException("Maximum is greater, than minimum");
+        }
+        return getAllDolgozo().stream().filter(d-> d.getFizetes() >= minimum && d.getFizetes()< maximum).collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<Dolgozo> getAllDolgozoWithMinimumWage(int minimum) {
+        return getAllDolgozo().stream().filter(d-> d.getFizetes() >= minimum).collect(Collectors.toList());
     }
 
     @Override

@@ -1,5 +1,7 @@
 package uni.eszterhazy.keretrendszer.model;
 
+import java.util.Objects;
+
 public class NyelvIsmeret {
     private String nyelv;
     private String szint;
@@ -43,5 +45,19 @@ public class NyelvIsmeret {
                 "nyelv='" + nyelv + '\'' +
                 ", szint='" + szint + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NyelvIsmeret that = (NyelvIsmeret) o;
+        return  Objects.equals(nyelv, that.nyelv) &&
+                Objects.equals(szint, that.szint);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nyelv, szint, id);
     }
 }

@@ -8,6 +8,7 @@ import uni.eszterhazy.keretrendszer.exceptions.RosszSzuletesiDatum;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 
@@ -98,5 +99,23 @@ public class Dolgozo {
                 ", fizetes=" + fizetes +
                 ", nyelvIsmeret=" + nyelvIsmeret +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dolgozo dolgozo = (Dolgozo) o;
+        return Double.compare(dolgozo.fizetes, fizetes) == 0 &&
+                Objects.equals(nev, dolgozo.nev) &&
+                Objects.equals(id, dolgozo.id) &&
+                Objects.equals(szuletesiDatum, dolgozo.szuletesiDatum) &&
+                reszleg == dolgozo.reszleg &&
+                nyelvIsmeret.equals(dolgozo.nyelvIsmeret);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nev, id, szuletesiDatum, reszleg, fizetes, nyelvIsmeret, logger);
     }
 }

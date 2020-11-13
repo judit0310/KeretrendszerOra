@@ -15,5 +15,10 @@ public interface DolgozoService {
     void removeDolgozo(Dolgozo dolgozo);
     Collection<Dolgozo> readAllDolgozoOfReszleg(Reszleg reszleg);
     double atlagFizetes();
+
+    Collection<Dolgozo> getAllDolgozoInWageRange(int minimum, int maximum);
+
+    Collection<Dolgozo> getAllDolgozoWithMinimumWage(int minimum);
+
     Map<Reszleg,Double> atlagFizetesReszlegenkent();
 }
